@@ -34,7 +34,15 @@ jobs:
               ],
               "properties": {
                 "Status": {
-                  "select": "opened"
+                  "type": "select",
+                  "select": {
+                    "options: [
+                      {
+                        "name": "Opened",
+                        "color": "purple"
+                      }
+                    ]
+                  }
                 },
                 "Link": {
                   "url": "test-url"
