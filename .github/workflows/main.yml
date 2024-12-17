@@ -59,7 +59,7 @@ jobs:
                 "Date": {
                   "date": {
                     "start": "${{ github.event.issue.created_at }}",
-                    "end": "${{ github.event.issue.closed_at }}"  
+                    "end": null
                   }
                 },
                 "Link": {
