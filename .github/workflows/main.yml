@@ -23,9 +23,6 @@ jobs:
                   {
                     "text": { "content": "Test Title from Github Actions!" }
                   }
-                ],
-                "Link": {
-                  "url": "test-url"
-                }
+                ]
               }
             }'
