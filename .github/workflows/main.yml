@@ -34,7 +34,6 @@ jobs:
               ],
               "properties": {
                 "Status": {
-                  "type": "select",
                   "select": {
                     "options: [
                       {
