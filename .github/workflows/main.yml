@@ -23,6 +23,9 @@ jobs:
                   {
                     "text": { "content": "Test Title from Github Actions!" }
                   }
-                ]
+                ],
+                "Status": {
+                  "select": "opened"
+                }
               }
             }'
