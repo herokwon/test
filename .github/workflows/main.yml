@@ -25,7 +25,9 @@ jobs:
                   }
                 ],
                 "Status": {
-                  "select": "opened"
+                  "select": {
+                    "name": "opened"
+                  }
                 }
               }
             }'
