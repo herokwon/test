@@ -26,7 +26,7 @@ jobs:
                 ],
                 "Status": {
                   "select": {
-                    "name": "opened"
+                    "name": "Opened"
                   }
                 }
               }
