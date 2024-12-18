@@ -44,4 +44,4 @@ jobs:
           date=$(cat date.json)
           echo "date=$(echo "$date" | jq -c .)" >> $GITHUB_OUTPUT
                   
-      - run: echo "${{ steps.notion.outputs.date.start }}"
+      - run: echo "${{ fromJSON(steps.notion.outputs.date).start }}"
