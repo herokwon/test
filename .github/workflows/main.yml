@@ -46,8 +46,8 @@ jobs:
           date=$(cat date.json)
 
           echo "status=$status" >> $GITHUB_OUTPUT
-          echo "assignees=$assignees" >> $GITHUB_OUTPUT
-          echo "labels=$labels" >> $GITHUB_OUTPUT
-          echo "date=$date" >> $GITHUB_OUTPUT
+          echo "assignees=$(cat assignees.json)" >> $GITHUB_OUTPUT
+          echo "labels=$(cat labels.json)" >> $GITHUB_OUTPUT
+          echo "date=$(cat date.json)" >> $GITHUB_OUTPUT
 
       - run: echo "${{ steps.properties.outputs.date.start }}"
