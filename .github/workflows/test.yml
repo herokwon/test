@@ -8,15 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up initial JSON object
         run: |
-          echo '{"name": "test", "status": "success"}' > data.json
+          echo '{ "start": "start", "time_zone": "Asia/Seoul" }' > data.json
 
       - name: Add new key-value pair to JSON object
         run: |
-          UPDATED_JSON=$(jq '. + { "end": "end"} | data.json)
+          UPDATED_JSON=$(jq '. + { end: "end" }' data.json)
           echo "${UPDATED_JSON}" > data.json
 
       - name: Output the modified JSON object
