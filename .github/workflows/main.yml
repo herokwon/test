@@ -17,6 +17,6 @@ jobs:
         id: notion
         run: |
           echo '${{ toJSON(github.event.issue.labels.*.name) }}' > labels.json
-          test=$(cat labels.json | tr -d "[]" | tr ',' '\n' | jq -R 'map({name: . | gsub("^\\s+|\\s+$"; "")})')
+          test=$(cat labels.json | tr -d "[]" | tr ',' '\n' | jq -R 'map({name: . | gsub('^\\s+|\\s+$'; "")})')
           echo "$test" > labels.json
           echo "$(cat labels.json)"
