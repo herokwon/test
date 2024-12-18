@@ -16,4 +16,4 @@ jobs:
       - name: Check notion database
         id: notion
         run: |
-          echo "${{ toJSON(github.event.issue.labels) }}" > labels.json
+          echo '${{ toJSON(github.event.issue.labels) }}' > labels.json
