@@ -16,8 +16,5 @@ jobs:
       - name: Check notion database
         id: notion
         run: |
-          echo '${{ github.event.issue.labels.*.name }}' > array.txt
-          test=$(jq -R 'split(", ") | map({ name: . })' <(tr -d "[]" < array.txt))
-          
-          echo "$test" > data.json
-          echo "$(cat data.json)"
+          test="${{ github.event.issue.labels.*.name }}"
+          echo "$test"
