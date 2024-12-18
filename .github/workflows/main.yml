@@ -23,31 +23,27 @@ jobs:
           assignees=$(cat assignees.json)
           labels=$(cat labels.json)
           
-          for data in $(echo "$assignees" | jq -c '.[]'); do
-            result=$(jq '[.[] | { name: "$data" }]' assignees.json)
-            echo "$result" > assignees.json
-          done
+          assignee_result=$(jq '[.[] | { name: . }] | .[]' assignees.json)
+          echo "$assignee_result" > assignees.json
           
-          for data in $(echo "$labels" | jq -c '.[]'); do
-            result=$(jq '[.[] | { name: "$data" }]' labels.json)
-            echo "$result" > labels.json
-          done
+          label_result=$(jq '[.[] | { name: . }] | .[]' labels.json)
+          echo "$label_result" > labels.json
           
           if [ "$status" == "" ]; then
             status="Opened"
-          elif [ "${{ github.event.issue.closed_at }}" != "" ]; then
+          elif [ "2024-12-18T14:46:33Z" != "" ]; then
             status="Closed"
-            date=$(jq '.end="${{ github.event.issue.closed_at }}"' date.json)
+            date=$(jq '.end="2024-12-18T14:46:33Z"' date.json)
             echo "$date" > date.json
           fi
-
+          
           assignees=$(cat assignees.json)
           labels=$(cat labels.json)
           date=$(cat date.json)
-
+          
           echo "status=$status" >> $GITHUB_OUTPUT
-          echo "assignees=${assignees}" >> $GITHUB_OUTPUT
-          echo "labels=${labels}" >> $GITHUB_OUTPUT
-          echo "date=${date}" >> $GITHUB_OUTPUT
+          echo "assignees=$(echo "${assignees}" | jq -c .)" >> $GITHUB_OUTPUT
+          echo "labels=$(echo "${labels}" | jq -c .)" >> $GITHUB_OUTPUT
+          echo "date=$(echo "${date}" | jq -c .)" >> $GITHUB_OUTPUT
 
       - run: echo "${{ steps.properties.outputs.date.start }}"
