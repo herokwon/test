@@ -16,13 +16,23 @@ jobs:
       - name: Check notion database
         id: notion
         run: |
-          echo '{ "start": "${{ github.event.issue.created_at }}", "end": null, "time_zone": "Asia/Seoul" }' > date.json
           echo '${{ toJSON(github.event.issue.assignees.*.login) }}' > assignees.json
           echo '${{ toJSON(github.event.issue.labels.*.name) }}' > labels.json
+          echo '{ "start": "${{ github.event.issue.created_at }}", "end": null, "time_zone": "Asia/Seoul" }' > date.json
           status=""
           assignees=$(cat assignees.json)
           labels=$(cat labels.json)
-
+          
+          for data in $(echo "$assignees" | jq -c '.[]'); do
+            result=$(jq '[.[] | { name: "$data" }]' assignees.json)
+            echo "$result" > assignees.json
+          done
+          
+          for data in $(echo "$labels" | jq -c '.[]'); do
+            result=$(jq '[.[] | { name: "$data" }]' labels.json)
+            echo "$result" > labels.json
+          done
+          
           if [ "$status" == "" ]; then
             status="Opened"
           elif [ "${{ github.event.issue.closed_at }}" != "" ]; then
@@ -31,18 +41,9 @@ jobs:
             echo "$date" > date.json
           fi
 
-          for data in $(echo "$assignees" | jq -c '.[]'); do
-            result=$(jq '[.[] | { name: "$data" }]' assignees.json)
-            echo "$result" > assignees.json
-          done
-          for data in $(echo "$labels" | jq -c '.[]'); do
-            result=$(jq '[.[] | { name: "$data" }]' labels.json)
-            echo "$result" > labels.json
-          done
-
           assignees=$(cat assignees.json)
           labels=$(cat labels.json)
-          date=$(cat data.json)
+          date=$(cat date.json)
 
           echo "status=$status" >> $GITHUB_OUTPUT
           echo "assignees=$assignees" >> $GITHUB_OUTPUT
