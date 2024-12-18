@@ -19,7 +19,7 @@ jobs:
           echo '{ "start": "${{ github.event.issue.created_at }}", "end": null, "time_zone": "Asia/Seoul" }' > date.json
           echo '${{ toJSON(github.event.issue.assignees.*.login) }}' > assignees.json
           echo '${{ toJSON(github.event.issue.labels.*.name) }}' > labels.json
-          status="${{ needs.check-existence.outputs.status }}"
+          status=""
           assignees=$(cat assignees.json)
           labels=$(cat labels.json)
 
