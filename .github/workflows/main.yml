@@ -19,4 +19,4 @@ jobs:
           echo "${{ toJSON(github.event.issue.labels) }}" > labels.json
           test=$(jq '[.[] | { name: .name }]' labels.json)
           echo "$test" > labels.json
-          echo "$(cat labels.jsion)"
+          echo "$(cat labels.json)"
