@@ -41,6 +41,7 @@ jobs:
             echo "$date" > date.json
           fi
 
-          echo "date=$(echo "$(cat date.json)" | jq -c .)" >> $GITHUB_OUTPUT
+          date=$(echo "$(cat date.json)" | jq -c .)
+          echo "date=$date" >> $GITHUB_OUTPUT
                   
       - run: echo "${{ fromJSON(steps.notion.outputs.date).start }}"
