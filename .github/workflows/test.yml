@@ -9,10 +9,8 @@ jobs:
     steps:
       - id: test
         run: |
-          test='{
-            "start": "start",
-            "end": "end"
-          }'
+          test='{ "start": "start", "time_zone": "Asia/Seoul" }'
+          test=$(jq '. + { "end": "end" } | ${{ fromJSON(test) }})
 
           echo "test=$test" >> $GITHUB_OUTPUT
 
