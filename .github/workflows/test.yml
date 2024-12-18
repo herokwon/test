@@ -13,10 +13,11 @@ jobs:
       - name: Add new key-value pair to JSON object
         id: add
         run: |
-          test='{ "start": "start", "end": null, "time_zone": "Asia/Seoul" }'
-          result=$(jq '.end="end"' test)
-          echo "result=$result" >> $GITHUB_OUTPUT
+          echo '{ "start": "start", "end": null, "time_zone": "Asia/Seoul" }' > data.json
+
+          result=$(jq '.end="end"' data.json)
+          echo "result=$result" > data.json
 
       - name: Output the modified JSON object
         run: |
-          echo "The modified JSON object is: ${{ steps.add.outputs.result }}"
+          echo "The modified JSON object is: $(cat data.json)"
