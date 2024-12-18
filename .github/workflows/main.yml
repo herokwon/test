@@ -14,6 +14,7 @@ jobs:
           fetch-depth: 0
 
       - name: Check notion database
+        id: notion
         run: |
           echo '${{ toJSON(github.event.issue.assignees.*.login) }}' > assignees.json
           echo '${{ toJSON(github.event.issue.labels.*.name) }}' > labels.json
@@ -39,4 +40,8 @@ jobs:
             date=$(jq '.end="${{ github.event.issue.closed_at }}"' date.json)
             echo "$date" > date.json
           fi
-      - run: echo "$(cat date.json)"
+
+          date=$(cat date.json)
+          echo "date=$(echo "$date" | jq -c .)" >> $GITHUB_OUTPUT
+                  
+      - run: echo "${{ steps.notion.outputs.date }}"
