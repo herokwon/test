@@ -20,4 +20,4 @@ jobs:
 
       - name: Output the modified JSON object
         run: |
-          echo "The modified JSON object is: $(data.json.end)"
+          echo "The modified JSON object is: $data.json.end"
