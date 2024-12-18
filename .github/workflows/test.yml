@@ -16,8 +16,7 @@ jobs:
 
       - name: Add new key-value pair to JSON object
         run: |
-          # 기존 JSON 객체를 읽어서 새로운 key-value 쌍을 추가합니다.
-          UPDATED_JSON=$(jq '. + { end: "end"} | data.json)
+          UPDATED_JSON=$(jq '. + { "end": "end"} | data.json)
           echo "${UPDATED_JSON}" > data.json
 
       - name: Output the modified JSON object
