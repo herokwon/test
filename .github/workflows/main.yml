@@ -17,6 +17,3 @@ jobs:
         id: notion
         run: |
           echo "${{ toJSON(github.event.issue.labels) }}" > labels.json
-          test=$(jq '[.[] | { name: .name }]' labels.json)
-          echo "${test}" > labels.json
-          echo "$(cat labels.json)"
