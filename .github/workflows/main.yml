@@ -31,11 +31,11 @@ jobs:
             echo "$date" > date.json
           fi
 
-          for data in $(assignees | jq -c '.[]'); do
+          for data in $(echo "$assignees" | jq -c '.[]'); do
             result=$(jq '[.[] | { name: "$data" }]' assignees.json)
             echo "$result" > assignees.json
           done
-          for data in $(labels | jq -c '.[]'); do
+          for data in $(echo "$labels" | jq -c '.[]'); do
             result=$(jq '[.[] | { name: "$data" }]' labels.json)
             echo "$result" > labels.json
           done
