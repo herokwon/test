@@ -16,5 +16,7 @@ jobs:
       - name: Check notion database
         id: notion
         run: |
-          test="${{ github.event.issue.labels.*.name }}"
-          echo "$test"
+          echo "${{ toJSON(github.event.issue.labels) }}" > labels.json
+          test=$(jq '[.[] | { name: .name }]' labels.json)
+          echo "$test" > labels.json
+          echo "$(cat labels.jsion)"
