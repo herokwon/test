@@ -94,7 +94,7 @@ jobs:
                   "date": {
                     "start": "${{ github.event.issue.created_at }}",
                     "end": null,
-                    "timezone": "Asia/Seoul"
+                    "time_zone": "Asia/Seoul"
                   }
                 },
                 "Link": {
@@ -120,7 +120,7 @@ jobs:
                   "date": {
                     "start": "${{ github.event.issue.created_at }}",
                     "end": "${{ github.event.issue.closed_at }}",
-                    "timezone": "Asia/Seoul"
+                    "time_zone": "Asia/Seoul"
                   }
                 }
               }
