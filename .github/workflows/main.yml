@@ -38,10 +38,14 @@ jobs:
               status=$(echo "$results" | jq -r '.[0].properties.Status.select.name')
             fi
 
-            echo "::set-output name=page_id::$page_id"
-            echo "::set-output name=status::$status"
+            echo "page_id=$page_id" >> $GITHUB_OUTPUT
+            echo "status=$status" >> $GITHUB_OUTPUT
 
-      - if: ${{ steps.notion.outputs.page_id == '' && steps.notion.outputs.status == '' }}
+      - run: |
+          echo "${{ steps.notion.outputs.page_id }}"
+          echo "${{ steps.notion.outputs.status }}"
+
+      - if: ${{ github.event.issue.closed_at == '' && steps.notion.outputs.page_id == '' && steps.notion.outputs.status == '' }}
         run: |
           curl -X POST "https://api.notion.com/v1/pages" \
             -H "Authorization: Bearer ${{ secrets.NOTION_API_KEY }}" \
@@ -89,7 +93,8 @@ jobs:
                 "Date": {
                   "date": {
                     "start": "${{ github.event.issue.created_at }}",
-                    "end": null
+                    "end": null,
+                    "timezone": "Asia/Seoul"
                   }
                 },
                 "Link": {
@@ -98,13 +103,12 @@ jobs:
               }
             }'
 
-      - if: ${{ github.event.issue.closed_at && steps.notion.outputs.page_id != '' && steps.notion.outputs.status == 'Opened' }}
+      - if: ${{ github.event.issue.closed_at != '' && steps.notion.outputs.page_id != '' && steps.notion.outputs.status == 'Opened' }}
         run: |
-          curl "https://api.notion.com/v1/pages/${{ steps.notion.outputs.page_id }}" \
+          curl -X PATCH "https://api.notion.com/v1/pages/${{ steps.notion.outputs.page_id }}" \
             -H "Authorization: Bearer ${{ secrets.NOTION_API_KEY}}" \
             -H "Content-Type: application/json" \
             -H "Notion-Version: 2022-06-28" \
-            -X PATCH \
             --data '{
               "properties": {
                 "Status": {
@@ -114,7 +118,9 @@ jobs:
                 },
                 "Date": {
                   "date": {
-                    "end": "${{ github.event.issue.closed_at }}"
+                    "start": "${{ github.event.issue.created_at }}",
+                    "end": "${{ github.event.issue.closed_at }}",
+                    "timezone": "Asia/Seoul"
                   }
                 }
               }
