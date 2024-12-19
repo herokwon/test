@@ -15,7 +15,7 @@ jobs:
     steps:
       - id: test
         run: |
-          echo "${{ toJSON(github.event.issue.labels.*.name) }}" > test.json
+          echo '${{ toJSON(github.event.issue.labels.*.name) }}' > test.json
 
           for data in $(echo "$(cat test.json)" | jq -c '.[]'); do
             result=$(jq '[.[] | { name: "$data" }]' test.json)
