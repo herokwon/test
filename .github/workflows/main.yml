@@ -104,7 +104,7 @@ jobs:
 
           if [ "${{ needs.check-existence.outputs.page_id }}" == "" -a "${{ steps.properties.outputs.status }}" == "Opened" ]; then
             method="POST"
-            body=$(jq '. + { parant: { database_id: "${{ secrets.NOTION_DATABASE_ID }}" } }' body.json)
+            body=$(jq '. + { parent: { database_id: "${{ secrets.NOTION_DATABASE_ID }}" } }' body.json)
             echo "$body" > body.json
           fi
 
