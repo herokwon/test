@@ -22,7 +22,7 @@ jobs:
             echo "$result" > test.json
           done
 
-          test=$(echo "$(cat jest.json)" | jq -c .)
+          test=$(echo "$(cat test.json)" | jq -c .)
           echo "test=$test" >> $GITHUB_OUTPUT
 
       - run: echo "${{ steps.test.outputs.test }}"
