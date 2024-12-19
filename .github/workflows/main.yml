@@ -20,5 +20,5 @@ jobs:
 
       - name: Test
         run: |
-          echo "${{ toJSON(github.event.issue.pull_request) }}" > data.json
+          echo "${{ toJSON(github.event.issue.pull_request.html_url) }}" > data.json
           echo "$(cat data.json)"
