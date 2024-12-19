@@ -1,4 +1,4 @@
-name: Notion Synchronization
+name: Test
 
 on:
   issues:
@@ -21,4 +21,3 @@ jobs:
       - name: Test
         run: |
           echo "${{ github.event.issue.pull_request.html_url }}"
-          echo "${{ toJSON(github.event.issue.pull_request.*.html_url) }}"
