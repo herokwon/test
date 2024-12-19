@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "{}" > data.json
+
+          test=$(jq '. + { name: { first: "kim" } }' data.json)
+          echo "$test" > data.json
+
+          echo "result=$(cat data.json)"
