@@ -19,7 +19,7 @@ jobs:
           labels=$(cat test.json)
 
           for data in $(labels | jq -c '.[]'); do
-            result=$(jq '. + [{ name: "$data" }]' test.json)
+            result=$(jq '[.[] + { name: "$data" }]' test.json)
             echo "$result" > test.json
           done
 
