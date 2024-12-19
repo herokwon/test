@@ -117,7 +117,9 @@ jobs:
               },
               Title: {
                 title: [{
-                  text: "${{ github.event.issue.title }}"  
+                  text: {
+                    content: "${{ github.event.issue.title }}"  
+                  }
                 }]
               },
               Assignees: {
