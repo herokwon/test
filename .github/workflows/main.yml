@@ -23,4 +23,4 @@ jobs:
             echo "$result" > test.json
           done
 
-          echo "$(cat result.json)"
+          echo "$(cat test.json)"
