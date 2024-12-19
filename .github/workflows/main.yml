@@ -18,8 +18,8 @@ jobs:
           echo '${{ toJSON(github.event.issue.labels.*.name) }}' > test.json
 
           for data in $(echo "$(cat test.json)" | jq -c '.[]'); do
-            result=$(jq '[.[] | { name: $data }]' test.json)
-            echo "$result" > test.json
+            result=$(jq '[.[] | { name: "$data" }]' result.json)
+            echo "$result" > result.json
           done
 
-          echo "$(cat test.json)"
+          echo "$(cat result.json)"
