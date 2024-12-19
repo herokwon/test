@@ -23,4 +23,5 @@ jobs:
             echo "$result" > test.json
           done
 
-          echo "$(cat test.json)"
+          echo "test=$(cat test.json)" >> $GITHUB_OUTPUT
+      - run: echo "${{ steps.test.outputs.test }}"
