@@ -63,7 +63,7 @@ jobs:
 
           echo "[]" > assignees.json
           echo "[]" > labels.json
-          echo '{ "start": "${{ github.event.issue.created_at }}", "end": null, "time_zone": "Asia/Seoul" }' > date.json
+          echo '{ "start": "${{ github.event.issue.created_at }}+0900", "end": null, "time_zone": "Asia/Seoul" }' > date.json
 
           for data in $(echo "$assignees" | jq -c '.[]'); do
             result=$(jq '. + [{ name: '$data' }]' assignees.json)
@@ -76,7 +76,7 @@ jobs:
 
           if [ "${{ github.event.issue.closed_at }}" != "" ]; then
             status="Closed"
-            date=$(jq '.end="${{ github.event.issue.closed_at }}"' date.json)
+            date=$(jq '.end="${{ github.event.issue.closed_at }}+0900"' date.json)
             echo "$date" > date.json
           else
             status="Opened"
