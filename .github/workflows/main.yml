@@ -134,12 +134,13 @@ jobs:
               }  
             }
           }' body.json)
-
           echo "$body" > body.json
+
+          body=$(echo "$(cat body.json)" | jq -c .)
 
           echo "method=$method" >> $GITHUB_OUTPUT
           echo "request_url=$request_url" >> $GITHUB_OUTPUT
-          echo "body=$(echo "$(cat body.json)" | jq -c .)" >> $GITHUB_OUTPUT
+          echo "body=$body" >> $GITHUB_OUTPUT
 
       - name: Synchronize page properties with Notion
         if: ${{ !(needs.check-existence.outputs.page_id == '' && steps.params.outputs.method == 'PATCH') }}
