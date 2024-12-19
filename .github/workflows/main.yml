@@ -115,9 +115,9 @@ jobs:
                 } 
               },
               Title: {
-                title: [
-                  content: "${{ github.event.issue.title }}"  
-                ]  
+                title: [{
+                  content: "${{ github.event.issue.title }}"
+                }]  
               },
               Assignees: {
                 multi_select: ${{ steps.properties.outputs.assignees }}  
