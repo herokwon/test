@@ -19,5 +19,4 @@ jobs:
           fetch-depth: 0
 
       - name: Test
-        run: |
-          echo "${{ github.event.issue.pull_request.html_url }}"
+        run: echo "${{ toJSON(github.event.issue.pull_request.html_url) }}"
