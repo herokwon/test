@@ -19,7 +19,7 @@ jobs:
           labels='${{ toJSON(github.event.issue.labels.*.name) }}'
 
           for data in $(echo "$labels" | jq -c '.[]'); do
-            result=$(jq '. + [{ name: "$data" }]' test.json)
+            result=$(jq '. + [{ name: '$data' }]' test.json)
             echo "$result" > test.json
           done
 
